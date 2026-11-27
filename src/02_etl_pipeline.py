@@ -58,7 +58,7 @@ dedup_removed = raw_count - df_dedup.count()
 
 # Filtrage strict : format date YYYY-MM + circulations prevues > 0
 df_valid = df_dedup.filter(
-    F.col("date").rlike(r"^\d{4}-\d{2}$") &
+    F.col("date").cast("string").rlike(r"^\d{4}-\d{2}") &
     (F.col("nombre_de_circulations_prevues") > 0)
 )
 invalid_removed = df_dedup.count() - df_valid.count()
